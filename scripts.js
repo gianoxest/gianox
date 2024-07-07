@@ -1,6 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
     fetch('articles.txt')
-        .then(response => response.text())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.text();
+        })
         .then(data => {
             const listings = data.trim().split('\n').map(line => {
                 const [id, details] = line.split(': ');
@@ -16,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 itemElement.innerHTML = `
                     <img src="images/${item.id}.jpg" alt="${item.title}" style="width:100%">
-                    <h3>${item.title}</h3>
+                    <h3><a href="article.html?id=${item.id}">${item.title}</a></h3>
                     <p>Objet: ${item.object}</p>
                     <p>Taille: ${item.size}</p>
                     <p>Prix: ${item.price}€</p>
