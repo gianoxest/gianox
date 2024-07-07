@@ -1,0 +1,3 @@
+1: jean long,jean,M,39.99
+2: robe courte,robe,S,29.99
+3: chaussures de sport,chaussures,42,59.99
